@@ -1,8 +1,10 @@
 using System;
+using System.Drawing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
-namespace EX3
+namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
@@ -11,78 +13,26 @@ namespace EX3
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            // You can add any initialization logic here if needed.
+            UpdateLabelFontStyle();
         }
 
-        private void button1_Click(object sender, EventArgs e) // Add Button
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                var a = Convert.ToInt32(textBox1.Text);
-                var b = Convert.ToInt32(textBox2.Text);
-                var c = a + b;
-                textBox3.Text = c.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            UpdateLabelFontStyle();
         }
 
-        private void button2_Click(object sender, EventArgs e) // Subtract Button
+        private void UpdateLabelFontStyle()
         {
-            try
-            {
-                var a = Convert.ToInt32(textBox1.Text);
-                var b = Convert.ToInt32(textBox2.Text);
-                var c = a - b;
-                textBox3.Text = c.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+            FontStyle style = FontStyle.Regular;
 
-        private void button3_Click(object sender, EventArgs e) // Multiply Button
-        {
-            try
-            {
-                var a = Convert.ToInt32(textBox1.Text);
-                var b = Convert.ToInt32(textBox2.Text);
-                var c = a * b;
-                textBox3.Text = c.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+            if (checkBox1.Checked)
+                style |= FontStyle.Bold;
+            if (checkBox2.Checked)
+                style |= FontStyle.Italic;
 
-        private void button4_Click(object sender, EventArgs e) // Divide Button
-        {
-            try
-            {
-                var a = Convert.ToInt32(textBox1.Text);
-                var b = Convert.ToInt32(textBox2.Text);
-
-                if (b == 0)
-                {
-                    MessageBox.Show("Division by zero is not allowed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBox3.Text = "Error";
-                }
-                else
-                {
-                    var c = a / b;
-                    textBox3.Text = c.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            label1.Font = new Font(label1.Font.FontFamily, label1.Font.Size, style);
         }
     }
 }

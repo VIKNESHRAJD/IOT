@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace EX3
+namespace WindowsFormsApplication1
 {
     static class Program
     {
